@@ -15,11 +15,11 @@ authRoutes.post("/login", login);
 
 authRoutes.post("/register", register);
 
-authRoutes.get("/logout", logout);
+authRoutes.post("/logout", logout);
 
 authRoutes.get("/me", authenticate, userDetails);
 
-authRoutes.post("/auth/google", googleLogin);
+authRoutes.post("/google", googleLogin);
 
 authRoutes.post("/resend", Resend);
 

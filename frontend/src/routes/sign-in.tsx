@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { useState } from 'react'
 import { Loader, Sun } from 'lucide-react'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
@@ -6,13 +6,16 @@ import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { axiosInstance } from '@/lib/axios'
+import { useAuthStore } from '@/lib/store'
 const SignUp = () => {
   const [formData, setFormData] = useState({
     email: '',
     otp: '',
   })
   const [optSent, setOptSent] = useState(false)
-
+  const { user } = useAuthStore()
+  const { setUser } = useAuthStore()
+  const naviagate = useNavigate()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -44,6 +47,10 @@ const SignUp = () => {
         data.message ||
           'User Registered Successfully enter the otp sent to your email',
       )
+      if (optSent) {
+        setUser(data.user)
+        naviagate({ to: '/' })
+      }
       setOptSent(true)
     },
     onError: (req: any) => {
@@ -71,7 +78,10 @@ const SignUp = () => {
         },
       )
       console.log(res.data)
-    } catch {
+      setUser(res.data.user)
+      naviagate({ to: '/' })
+    } catch (error) {
+      console.log(error)
       alert('Login failed')
     }
   }

@@ -51,6 +51,7 @@ export const googleLogin = async (req: Request, res: Response) => {
         email: user.email,
         name: user.name,
         avatar: user.avatar,
+        token: jwtToken,
       },
     });
   } catch (err) {
@@ -108,7 +109,7 @@ export const login = async (req: Request, res: Response) => {
 
     return res.json({
       message: "Login successful",
-      user: userExist,
+      user: { ...userExist, token: jwtToken },
     });
   } catch (error) {
     console.log("error in login", error);
