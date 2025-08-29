@@ -18,6 +18,8 @@ model User {
   googleId  String?  @unique
   email     String   @unique
   name      String
+  opt       String?
+  dob       DateTime
   password  String? // optional if using email+OTP
   createdAt DateTime @default(now())
   avatar    String?
