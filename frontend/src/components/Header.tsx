@@ -1,7 +1,7 @@
 import { axiosInstance } from '@/lib/axios'
 import { useAuthStore } from '@/lib/store'
 import { Link, useNavigate } from '@tanstack/react-router'
-import { Button } from './ui/button'
+import { Sun } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 export default function Header() {
@@ -9,10 +9,10 @@ export default function Header() {
   const naviagate = useNavigate()
   const handleLogout = async () => {
     try {
-      const res = await axiosInstance.post('/api/auth/logout')
+      await axiosInstance.post('/api/auth/logout')
       clearUser()
       toast('logout successful')
-      naviagate({ to: '/' })
+      naviagate({ to: '/' as string })
     } catch (error) {
       console.log('logut error', error)
     }
@@ -20,8 +20,9 @@ export default function Header() {
   return (
     <header className="p-2 flex gap-2 bg-white text-black justify-between items-center shadow">
       <nav className="flex flex-row">
-        <div className="px-2 font-bold">
-          <Link to="/">Home</Link>
+        <div className="px-2 font-bold flex items-center gap-2">
+          <Sun className="w-6 h-6 text-blue-500" />
+          <Link to={'/' as string}>Home</Link>
         </div>
       </nav>
 
