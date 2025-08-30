@@ -16,4 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/notes", authenticate, notesRoutes);
+app.get("/", (req, res) => {
+  res.send(process.env.FRONTEND_URL);
+});
 app.listen(8000, () => console.log("Server running on http://localhost:8000"));
