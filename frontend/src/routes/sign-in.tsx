@@ -13,7 +13,6 @@ const SignUp = () => {
     otp: '',
   })
   const [optSent, setOptSent] = useState(false)
-  const { user } = useAuthStore()
   const { setUser } = useAuthStore()
   const naviagate = useNavigate()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

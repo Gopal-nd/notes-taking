@@ -9,7 +9,8 @@
   "scripts": {
     "start": "bun run index.ts",
     "dev": "bun run --watch index.ts",
-    "db": "prisma generate && prisma db push"
+    "db": "prisma generate && prisma db push",
+    "postinstall": "prisma generate"
   },
   "peerDependencies": {
     "typescript": "^5"

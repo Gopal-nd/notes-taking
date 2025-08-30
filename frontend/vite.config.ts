@@ -12,13 +12,9 @@ export default defineConfig({
     viteReact(),
     tailwindcss(),
   ],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-  },
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src'),
+      '@': resolve(new URL('./src', import.meta.url).pathname),
     },
   },
 })
